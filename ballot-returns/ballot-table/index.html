@@ -1,0 +1,768 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Mail Ballots Leading Up to Election Day</title>
+    <meta charset="utf-8">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="mustache.js"></script>
+    <style>
+    h1 {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 36px;
+        text-align: center;
+    }
+    
+    table {
+        width: 100%;
+        font-family: Helvetica, Arial, sans-serif;
+        color: rgba(0, 0, 0, 0.7);
+        border-collapse: collapse;
+    }
+    
+    tbody#ballot tr:nth-of-type(3n) td {
+        border-bottom: 2px solid rgba(192, 192, 192, 1);
+    }
+    
+    tr {
+        border-left: 2px solid silver;
+        border-right: 2px solid silver;
+    }
+    
+    th {
+        font-size: 14px;
+        font-weight: normal;
+        text-align: center;
+        padding-bottom: 3px;
+    }
+    
+    td {
+        padding: 5px 0px 5px 5px;
+        font-size: 12px;
+        border: 1px solid rgba(192, 192, 192, 0.2);
+    }
+    
+    td:first-child {
+        padding-left: 5px;
+    }
+    
+    tbody#ballot tr:hover {
+        background-color: #eee;
+    }
+    
+    td.dem {
+        /* background: #bdd7ed; */
+        background: rgba(189, 215, 237, 0.5);
+    }
+    
+    td.rep {
+        background: rgba(241, 200, 200, 0.4);
+        /* background: #f1c8c8; */
+    }
+    
+    .footer {
+        border-top: 1px solid silver;
+        color: #888888;
+        font-size: 1.25rem;
+        text-align: center;
+        margin-top: 1rem;
+        padding: 0.5rem;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div id="container">
+            <h1 class="five columns">Mail Ballots Received</h1>
+            <p class="seven columns">The table shows the number of mail ballots received and counted in the days leading up to Election Day, broken down by voter registration and comparing 2016 and 2014 totals. The date field is colored to reflect what party had the most ballots counted that day. Resutls will be updated daily and reflect ballots received the day before.</p>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+    <script type="text/html" id="template">
+        <table>
+            <tbody>
+                <tr style="border-left: none; border-right: none; border-bottom: 2px solid silver">
+                    <th></th>
+                    <th>DEM</th>
+                    <th>REP</th>
+                    <th>UAF</th>
+                    <th>LBR</th>
+                    <th>GRN</th>
+                    <th>OTHER</th>
+                </tr>
+            </tbody>
+            <tbody id="ballot">
+                {{#ballots}}
+                <tr>
+                    <td class="{{color}}" style="border-right: 2px solid silver">{{date}}</td>
+                    <td>{{DEM}}</td>
+                    <td>{{REP}}</td>
+                    <td>{{UAF}}</td>
+                    <td>{{LBR}}</td>
+                    <td>{{GRN}}</td>
+                    <td>{{minorparties}}</td>
+                </tr>
+                {{/ballots}}
+            </tbody>
+        </table>
+    </script>
+    <script>
+    (function() {
+        //this is our JSON (data)
+
+        var data = {
+                "ballots": [
+                    // {
+                    //     "date": "Oct. 17, 2016",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": "rep"
+                    // }, {
+                    //     "date": "2014",
+                    //     "County": "Grand Total",
+                    //     "ACN": 3,
+                    //     "DEM": 587,
+                    //     "GRN": 16,
+                    //     "LBR": 15,
+                    //     "REP": 583,
+                    //     "UAF": 443,
+                    //     "UNI": 0,
+                    //     "Grand Total": "1,647",
+                    //     "minorparties": 3,
+                    //     "color": "dem"
+                    // }, {
+                    //     "date": "+/-",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": "diff"
+                    // }, {
+                    //     "date": "Oct. 18, 2016",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": ""
+                    // }, {
+                    //     "date": "2014",
+                    //     "County": "Grand Total",
+                    //     "ACN": 6,
+                    //     "DEM": 688,
+                    //     "GRN": 18,
+                    //     "LBR": 15,
+                    //     "REP": 705,
+                    //     "UAF": 506,
+                    //     "UNI": 0,
+                    //     "Grand Total": "1,938",
+                    //     "minorparties": 6,
+                    //     "color": "rep"
+                    // }, {
+                    //     "date": "+/-",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": "diff"
+                    // }, {
+                    //     "date": "Oct. 19, 2016",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": ""
+                    // }, {
+                    //     "date": "2014",
+                    //     "County": "Grand Tota",
+                    //     "ACN": 12,
+                    //     "DEM": "1,731",
+                    //     "GRN": 23,
+                    //     "LBR": 44,
+                    //     "REP": "2,389",
+                    //     "UAF": "1,219",
+                    //     "UNI": 0,
+                    //     "Grand Total": "5,418",
+                    //     "minorparties": 12,
+                    //     "color": "rep"
+                    // }, {
+                    //     "date": "+/-",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": "diff"
+                    // }, {
+                    //     "date": "Oct. 20, 2016",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": ""
+                    // }, {
+                    //     "date": "2014",
+                    //     "County": "Grand Total",
+                    //     "ACN": 77,
+                    //     "DEM": "8,714",
+                    //     "GRN": 49,
+                    //     "LBR": 170,
+                    //     "REP": "12,766",
+                    //     "UAF": "5,864",
+                    //     "UNI": 0,
+                    //     "Grand Total": "27,640",
+                    //     "minorparties": 77,
+                    //     "color": "rep"
+                    // }, {
+                    //     "date": "+/-",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": "diff"
+                    // }, 
+                    // {
+                    //     "date": "Oct. 21, 2016",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": "dem"
+                    // }, {
+                    //     "date": "2014",
+                    //     "County": "Grand Total",
+                    //     "ACN": 185,
+                    //     "DEM": "24,468",
+                    //     "GRN": 144,
+                    //     "LBR": 537,
+                    //     "REP": "36,830",
+                    //     "UAF": "17,191",
+                    //     "UNI": 0,
+                    //     "Grand Total": "79,355",
+                    //     "minorparties": 185,
+                    //     "color": "rep"
+                    // }, {
+                    //     "date": "+/-",
+                    //     "County": "Grand Total",
+                    //     "ACN": "",
+                    //     "DEM": "",
+                    //     "GRN": "",
+                    //     "LBR": "",
+                    //     "REP": "",
+                    //     "UAF": "",
+                    //     "UNI": "",
+                    //     "Grand Total": "",
+                    //     "minorparties": "",
+                    //     "color": "diff"
+                    // }, 
+                    {
+                        "date": "Oct. 24, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": 491,
+                        "DEM": "64,777",
+                        "GRN": 376,
+                        "LBR": "1,370",
+                        "REP": "91,060",
+                        "UAF": "46,404",
+                        "UNI": 2,
+                        "Grand Total": "204,480",
+                        "minorparties": 493,
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Oct. 25, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": 703,
+                        "DEM": "105,401",
+                        "GRN": 647,
+                        "LBR": "2,185",
+                        "REP": "145,824",
+                        "UAF": "77,285",
+                        "UNI": 5,
+                        "Grand Total": "332,050",
+                        "minorparties": 708,
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Oct. 26, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": 903,
+                        "DEM": "139,410",
+                        "GRN": 865,
+                        "LBR": "2,829",
+                        "REP": "190,235",
+                        "UAF": "102,031",
+                        "UNI": 5,
+                        "Grand Total": "436,278",
+                        "minorparties": 908,
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Oct. 27, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": "1,043",
+                        "DEM": "164,443",
+                        "GRN": "1,040",
+                        "LBR": "3,343",
+                        "REP": "226,923",
+                        "UAF": "121,812",
+                        "UNI": 6,
+                        "Grand Total": "518,610",
+                        "minorparties": "1,049",
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Oct. 28, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": "1,316",
+                        "DEM": "213,975",
+                        "GRN": "1,362",
+                        "LBR": "4,242",
+                        "REP": "282,317",
+                        "UAF": "156,893",
+                        "UNI": 8,
+                        "Grand Total": "660,113",
+                        "minorparties": "1,324",
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Oct. 31, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": "1,528",
+                        "DEM": "251,174",
+                        "GRN": "1,637",
+                        "LBR": "5,011",
+                        "REP": "332,200",
+                        "UAF": "187,485",
+                        "UNI": 9,
+                        "Grand Total": "779,044",
+                        "minorparties": "1,537",
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Nov. 1, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": "1,763",
+                        "DEM": "294,648",
+                        "GRN": "1,952",
+                        "LBR": "5,831",
+                        "REP": "379,250",
+                        "UAF": "222,043",
+                        "UNI": 13,
+                        "Grand Total": "905,500",
+                        "minorparties": "1,776",
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Nov. 2, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": "2,038",
+                        "DEM": "337,897",
+                        "GRN": "2,258",
+                        "LBR": "6,763",
+                        "REP": "433,240",
+                        "UAF": "259,947",
+                        "UNI": 17,
+                        "Grand Total": "1,042,160",
+                        "minorparties": "2,055",
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Nov. 3, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": "2,239",
+                        "DEM": "371,190",
+                        "GRN": "2,523",
+                        "LBR": "7,498",
+                        "REP": "475,677",
+                        "UAF": "290,600",
+                        "UNI": 18,
+                        "Grand Total": "1,149,745",
+                        "minorparties": "2,257",
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Nov. 4, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "ACN": "2,717",
+                        "DEM": "446,448",
+                        "GRN": "3,098",
+                        "LBR": "9,211",
+                        "REP": "558,966",
+                        "UAF": "359,496",
+                        "UNI": 26,
+                        "Grand Total": "1,379,962",
+                        "minorparties": "2,743",
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Nov. 7, 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "2014",
+                        "County": "Grand Tota",
+                        "ACN": "3,588",
+                        "DEM": "564,488",
+                        "GRN": "4,368",
+                        "LBR": "12,934",
+                        "REP": "693,983",
+                        "UAF": "491,591",
+                        "UNI": 46,
+                        "Grand Total": "1,770,998",
+                        "minorparties": "3,634",
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }, {
+                        "date": "Election Day 2016",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": ""
+                    }, {
+                        "date": "Election Day 2014",
+                        "ACN": "4,324",
+                        "DEM": "662,042",
+                        "GRN": "5,508",
+                        "LBR": "16,372",
+                        "REP": "774,229",
+                        "UAF": "605,182",
+                        "UNI": 63,
+                        "Grand Total": "2,067,720",
+                        "minorparties": "4,387",
+                        "color": "rep"
+                    }, {
+                        "date": "+/-",
+                        "ACN": "",
+                        "DEM": "",
+                        "GRN": "",
+                        "LBR": "",
+                        "REP": "",
+                        "UAF": "",
+                        "UNI": "",
+                        "Grand Total": "",
+                        "minorparties": "",
+                        "color": "diff"
+                    }
+                ],
+            },
+
+            //get a reference to our HTML template
+            template = $('#template').html(),
+
+            //tell Mustache.js to iterate through the JSON and insert the data into the HTML template
+            output = Mustache.render(template, data);
+
+        //append the HTML template to the DOM
+        $('#container').append(output);
+    })();
+    </script>
+    <div class="row footer">
+        <p><strong>Data source</strong>: <a href="https://www.sos.state.co.us/">Colorado Secretary of State</a></p>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Mail Ballot Chart</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+</head>
+
+<body>
+    <div id="ballot-chart"></div>
+    <script src="http://d3js.org/d3.v3.min.js " charset="utf-8 "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <script>
+    var chart = c3.generate({
+        bindto: '#ballot-chart',
+        data: {
+            columns: [
+                ['DEM', 64777, 105401, 139410, 164443, 213975, 251174],
+                ['REP', 91060, 145824, 190235, 226923, 282317, 332200],
+                ['UAF', 46404, 77285, 102031, 121812, 156893, 187485],
+                ['LBR', 1370, 2185, 2829, 3343, 4242, 5011],
+                ['GRN', 376, 647, 865, 1040, 1362, 1637],
+                ['OTHER', 493, 708, 908, 1049, 1324, 1537]
+            ],
+            type: 'bar',
+            labels: false,
+            groups: [
+                ['DEM', 'REP', 'UAF', 'LBR', 'GRN', 'OTHER']
+            ]
+        },
+        axis: {
+            x: {
+                type: 'category',
+                categories: ['Oct. 21']
+            }
+        },
+        grid: {
+            y: {
+                lines: [{
+                    value: 0
+                }]
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

@@ -14,59 +14,83 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
     <script>
     var chart = c3.generate({
-            size: {
-                height: 400
-            },
-            bindto: '#ballot-chart',
-            data: {
-                columns: [
-                    ['DEM 2016',1 ],
-                    ['DEM 2014', 64777, 105401, 139410, 164443, 213975, 251174, 294648, 337897, 371190, 446448, 564488, 662042],
-                    ['REP 2016',1 ],
-                    ['REP 2014', 91060, 145824, 190235, 226923, 282317, 332200, 379250, 433240, 475677, 558966, 693983, 774229],
-                    ['UAF 2016',1 ],
-                    ['UAF 2014', 46404, 77285, 102031, 121812, 156893, 187485, 222043, 259947, 290600, 359496, 491591, 605182],
-                    ['LBR 2016',1 ],
-                    ['LBR 2014', 1370, 2185, 2829, 3343, 4242, 5011, 5831, 6763, 7498, 9211, 12934, 16372],
-                    ['OTHER 2016',1 ],
-                    ['OTHER 2014', 869, 1355, 1773, 2089, 2686, 3174, 3728, 4313, 4780, 5841, 8002, 9895]
-                ],
-                type: 'line',
-                labels: false, // groups: [
-                //     ['DEM', 'REP', 'UAF', 'LBR', 'GRN', 'OTHER']
-                // ]
-                colors: {
-                    'DEM 2016': 'rgba(5,113,176,1.0)',
-                    'DEM 2014': 'rgba(5,113,176,0.3)',
-                    'REP 2016': 'rgba(202,0,32,1.0)',
-                    'REP 2014': 'rgba(202,0,32,0.3)',
-                    'UAF 2016': 'rgba(123,50,148,1.0)',
-                    'UAF 2014': 'rgba(123,50,148,0.3)',
-                    'LBR 2016': 'rgba(253,174,97,1.0)',
-                    'LBR 2014': 'rgba(253,174,97,0.3)',
-                    'OTHER 2016': 'rgba(171,221,164,1.0)',
-                    'OTHER 2014': 'rgba(171,221,164,0.3)'
+        size: {
+            height: 400
+        },
+        padding: {
+            top: 0,
+            right: 25,
+            bottom: 0,
+            left: 90
+        },
+        bindto: '#ballot-chart',
+        data: {
+            columns: [
+                ['DEM 2016', 1],
+                ['DEM 2014', 64777, 105401, 139410, 164443, 213975, 251174, 294648, 337897, 371190, 446448, 564488, 662042],
+                ['REP 2016', 1],
+                ['REP 2014', 91060, 145824, 190235, 226923, 282317, 332200, 379250, 433240, 475677, 558966, 693983, 774229],
+                ['UAF 2016', 1],
+                ['UAF 2014', 46404, 77285, 102031, 121812, 156893, 187485, 222043, 259947, 290600, 359496, 491591, 605182],
+                ['LBR 2016', 1],
+                ['LBR 2014', 1370, 2185, 2829, 3343, 4242, 5011, 5831, 6763, 7498, 9211, 12934, 16372],
+                ['OTHER 2016', 1],
+                ['OTHER 2014', 869, 1355, 1773, 2089, 2686, 3174, 3728, 4313, 4780, 5841, 8002, 9895]
+            ],
+            type: 'line',
+            labels: false, // groups: [
+            //     ['DEM', 'REP', 'UAF', 'LBR', 'GRN', 'OTHER']
+            // ]
+            colors: {
+                'DEM 2016': 'rgba(5,113,176,1.0)',
+                'DEM 2014': 'rgba(5,113,176,0.3)',
+                'REP 2016': 'rgba(202,0,32,1.0)',
+                'REP 2014': 'rgba(202,0,32,0.3)',
+                'UAF 2016': 'rgba(123,50,148,1.0)',
+                'UAF 2014': 'rgba(123,50,148,0.3)',
+                'LBR 2016': 'rgba(253,174,97,1.0)',
+                'LBR 2014': 'rgba(253,174,97,0.3)',
+                'OTHER 2016': 'rgba(171,221,164,1.0)',
+                'OTHER 2014': 'rgba(171,221,164,0.3)'
+            }
+        },
+        axis: {
+            x: {
+                type: 'category',
+                categories: ['11 days to election', '10 days to election', '9 days to election', '8 days to election', '7 days to election', '6 days to election', '5 days to election', '4 days to election', '3 days to election', '2 days to election', '1 day to election', 'Election Day'],
+                tick: {
+                    rotate: 75,
+                    multiline: false
                 }
             },
-            axis: {
-                x: {
-                    type: 'category',
-                    categories: ['11 days to election', '10 days to election', '9 days to election', '8 days to election', '7 days to election', '6 days to election', '5 days to election', '4 days to election', '3 days to election', '2 days to election', '1 day to election', 'Election Day']
+            y: {
+                tick: {
+                    format: d3.format(",")
+                },
+                label: {
+                    text: 'Mail ballots returned',
+                    position: 'outer-middle'
                 }
-            },
-            legend: {
-                position: 'inset'
-            },
-            grid: {
-                y: {
-                    lines: [{
-                        value: 0
-                    }]
+            }
+        },
+        legend: {
+            position: 'inset'
+        },
+        grid: {
+            y: {
+                lines: [{
+                    value: 0
+                }]
+            }
+        },
+        tooltip: {
+            format: {
+                value: function(value) {
+                    return d3.format(",")(value)
                 }
             }
         }
-
-    );
+    });
     </script>
 </body>
 

@@ -85,7 +85,7 @@ h1 {
     <div id="container">
         <div class="row">
             <h1>Mail Ballots Received</h1>
-            <p>The table shows the number of mail ballots received and counted in the days leading up to Election Day, broken down by voter registration and comparing 2016 and 2014 totals. The date field is colored to reflect what party had the most ballots counted that day. Resutls will be updated daily and reflect ballots received the day before.</p>
+            <p>The table shows the number of mail ballots received and counted in the days leading up to Election Day, broken down by voter registration and comparing 2016 and 2014 totals. The date field is colored to reflect what party had the most ballots counted that day. Results will be updated daily.</p>
         </div>
         <div class="row">
             <div class="twelve columns" id="table-container"></div>
@@ -99,21 +99,9 @@ h1 {
                         <th>REP</th>
                         <th>UAF</th>
                         <th>LBR</th>
-                        <th>GRN</th>
                         <th>OTHER</th>
                     </tr>
                 </thead>
-                <!--     <tbody>
-                    <tr style="border-left: none; border-right: none; border-bottom: 2px solid silver">
-                        <th></th>
-                        <th>DEM</th>
-                        <th>REP</th>
-                        <th>UAF</th>
-                        <th>LBR</th>
-                        <th>GRN</th>
-                        <th>OTHER</th>
-                    </tr>
-                </tbody> -->
                 <tbody id="ballot">
                     {{#ballots}}
                     <tr>
@@ -122,7 +110,6 @@ h1 {
                         <td>{{REP}}</td>
                         <td>{{UAF}}</td>
                         <td>{{LBR}}</td>
-                        <td>{{GRN}}</td>
                         <td>{{minorparties}}</td>
                     </tr>
                     {{/ballots}}
@@ -342,9 +329,9 @@ h1 {
                             "UNI": "",
                             "Grand Total": "",
                             "minorparties": "",
-                            "color": ""
+                            "color": "" // rep to color date field red, dem to color it blue
                         }, {
-                            "date": "2014",
+                            "date": "2014 (11 days to Election Day)",
                             "ACN": 491,
                             "DEM": "64,777",
                             "GRN": 376,
@@ -380,7 +367,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (10)",
                             "ACN": 703,
                             "DEM": "105,401",
                             "GRN": 647,
@@ -416,7 +403,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (9)",
                             "ACN": 903,
                             "DEM": "139,410",
                             "GRN": 865,
@@ -452,7 +439,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (8)",
                             "ACN": "1,043",
                             "DEM": "164,443",
                             "GRN": "1,040",
@@ -488,7 +475,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (7)",
                             "ACN": "1,316",
                             "DEM": "213,975",
                             "GRN": "1,362",
@@ -524,7 +511,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (6)",
                             "ACN": "1,528",
                             "DEM": "251,174",
                             "GRN": "1,637",
@@ -560,7 +547,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (5)",
                             "ACN": "1,763",
                             "DEM": "294,648",
                             "GRN": "1,952",
@@ -596,7 +583,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (4)",
                             "ACN": "2,038",
                             "DEM": "337,897",
                             "GRN": "2,258",
@@ -632,7 +619,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (3)",
                             "ACN": "2,239",
                             "DEM": "371,190",
                             "GRN": "2,523",
@@ -668,7 +655,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (2)",
                             "ACN": "2,717",
                             "DEM": "446,448",
                             "GRN": "3,098",
@@ -704,7 +691,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014",
+                            "date": "2014 (1)",
                             "County": "Grand Tota",
                             "ACN": "3,588",
                             "DEM": "564,488",

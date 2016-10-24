@@ -4,16 +4,38 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width">
-    <title>Mail Ballot Chart</title>
+    <title>Colorado Mail Ballot Chart</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
     <link rel="canonical" href="http://www.denverpost.com/2016/10/24/colorado-2016-ballot-tracker-a-look-at-mail-ballot-return-data/">
 </head>
 
 <body>
     <div id="ballot-chart"></div>
-    <script src="http://d3js.org/d3.v3.min.js " charset="utf-8 "></script>
+    <h3>2016 Colorado ballot distribution by party</h3>
+    <div id="ballot-donut"></div>
+    <script src="http://d3js.org/d3.v3.min.js " charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
     <script>
+    var donut_chart = c3.generate({
+        bindto: '#ballot-donut',
+        data: {
+            columns: [
+                ['2016 Democrat', 48030],
+                ['2016 Republican', 36790],
+                ['2016 Unaffiliated', 27345],
+                ['2016 Libertarian', 1054],
+                ['2016 Other Party', 623],
+            ],
+            type : 'donut',
+            onclick: function (d, i) { console.log("onclick", d, i); },
+            onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+            onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+        },
+        donut: {
+            title: "Mail ballots by party"
+        }
+    });
+
     var chart = c3.generate({
         size: {
             height: 400

@@ -77,6 +77,8 @@
             margin: 0;
         }
         td { padding: 2px 0 2px 2px; }
+        /* Hide the "OTHER" column on phones */
+        tr th:nth-child(6), tr td:nth-child(6) { display: none; }
         #table-container {
             overflow: scroll;
             overflow: auto;

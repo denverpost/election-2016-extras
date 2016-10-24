@@ -200,16 +200,16 @@ var data = {
             {
                 "date": "Oct. 24, 2016",
                 "County": "Grand Total",
-                "ACN": "",
-                "DEM": "",
-                "GRN": "",
-                "LBR": "",
-                "REP": "",
-                "UAF": "",
-                "UNI": "",
-                "Grand Total": "",
+                "ACN": 265,
+                "DEM": "48,030",
+                "GRN": 345,
+                "LBR": "1,054",
+                "REP": "36,790",
+                "UAF": "27,435",
+                "UNI": "13",
+                "Grand Total": "113,932",
                 "minorparties": "",
-                "color": ""
+                "color": "dem"
             }, {
                 "date": "2014",
                 "County": "Grand Total",

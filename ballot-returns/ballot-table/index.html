@@ -11,7 +11,7 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script> -->
     <script type="text/javascript" src="mustache.js"></script>
     <style>
-h1 {
+    h1 {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 36px;
         text-align: center;
@@ -72,6 +72,7 @@ h1 {
     }
     
     @media only screen and (max-width: 500px) {
+        body { font-size: 1.2em; }
         #table-container {
             overflow: scroll;
             overflow: auto;
@@ -85,7 +86,7 @@ h1 {
     <div id="container">
         <div class="row">
             <h1>Mail Ballots Received</h1>
-            <p>The table shows the number of mail ballots received and counted in the days leading up to Election Day, broken down by voter registration and comparing 2016 and 2014 totals. The date field is colored to reflect what party had the most ballots counted that day. Results will be updated daily.</p>
+            <p>The table shows the number of mail ballots received and counted in the days leading up to Election Day, broken down by voter registration and comparing 2016 and 2014 totals. The date field is colored to reflect what party had the most ballots counted. Results will be updated daily.</p>
         </div>
         <div class="row">
             <div class="twelve columns" id="table-container"></div>
@@ -802,7 +803,7 @@ h1 {
         })();
         </script>
         <div class="row footer">
-            <p><strong>Data source</strong>: <a href="https://www.sos.state.co.us/">Colorado Secretary of State</a></p>
+            <p><strong>Data source</strong>: <a target="_top" href="https://www.sos.state.co.us/">Colorado Secretary of State</a></p>
         </div>
     </div>
 </body>

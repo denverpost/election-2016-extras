@@ -22,6 +22,13 @@
         uaf: 70410,
         lbr: 2531,
         other: 1433 };
+    var colors = {
+        'DEM': 'rgba(5,113,176,1.0)',
+        'REP': 'rgba(202,0,32,1.0)',
+        'UAF': 'rgba(123,50,148,1.0)',
+        'LBR': 'rgba(253,174,97,1.0)',
+        'OTHER': 'rgba(171,221,164,1.0)',
+    };
     var donut_chart = c3.generate({
         bindto: '#ballot-donut',
         data: {
@@ -32,6 +39,13 @@
                 ['2016 Libertarian', current.lbr],
                 ['2016 Other Party', current.other],
             ],
+            colors: {
+                '2016 Democrat': colors.DEM,
+                '2016 Republican': colors.REP,
+                '2016 Unaffiliated': colors.UAF,
+                '2016 Libertarian': colors.LBR,
+                '2016 Other Party': colors.OTHER
+            },
             type : 'donut',
             onclick: function (d, i) { console.log("onclick", d, i); },
             onmouseover: function (d, i) { console.log("onmouseover", d, i); },

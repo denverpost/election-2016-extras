@@ -16,12 +16,6 @@
     <script src="http://d3js.org/d3.v3.min.js " charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
     <script>
-    var current = {
-        dem: 117766,
-        rep: 94499,
-        uaf: 70410,
-        lbr: 2531,
-        other: 1433 };
     var colors = {
         'DEM': 'rgba(5,113,176,1.0)',
         'REP': 'rgba(202,0,32,1.0)',
@@ -29,6 +23,12 @@
         'LBR': 'rgba(253,174,97,1.0)',
         'OTHER': 'rgba(171,221,164,1.0)',
     };
+    var current = {
+        dem: 166605,
+        rep: 141354,
+        uaf: 103354,
+        lbr: 3581,
+        other: 2057};
     var donut_chart = c3.generate({
         bindto: '#ballot-donut',
         data: {
@@ -51,9 +51,7 @@
             onmouseover: function (d, i) { console.log("onmouseover", d, i); },
             onmouseout: function (d, i) { console.log("onmouseout", d, i); }
         },
-        donut: {
-            title: "Mail ballots by party"
-        }
+        donut: { title: "Mail ballots by party" }
     });
 
     var chart = c3.generate({
@@ -69,15 +67,15 @@
         bindto: '#ballot-chart',
         data: {
             columns: [
-                ['DEM 2016', 48030, current.dem], // 2016 daily totals
+                ['DEM 2016', 48030, 117766, current.dem], // 2016 daily totals
                 ['DEM 2014', 24468, 64777, 105401, 139410, 164443, 164443, 164443, 213975, 251174, 294648, 337897, 371190, 371190, 371190, 446448, 564488, 662042],
-                ['REP 2016', 36790, current.rep], // 2016 daily totals
+                ['REP 2016', 36790, 94499, current.rep], // 2016 daily totals
                 ['REP 2014', 36830, 91060, 145824, 190235, 226923, 226923, 226923, 282317, 332200, 379250, 433240, 475677, 475677, 475677, 558966, 693983, 774229],
-                ['UAF 2016', 27435, current.uaf], // 2016 daily totals
+                ['UAF 2016', 27435, 70410, current.uaf], // 2016 daily totals
                 ['UAF 2014', 17191, 46404, 77285, 102031, 121812, 121812, 121812, 156893, 187485, 222043, 259947, 290600, 290600, 290600, 359496, 491591, 605182],
-                ['LBR 2016', 1054, current.lbr], // 2016 daily totals
+                ['LBR 2016', 1054, 2531, current.lbr], // 2016 daily totals
                 ['LBR 2014', 537, 1370, 2185, 2829, 3343, 4242, 4242, 4242, 5011, 5831, 6763, 7498, 7498, 7498, 9211, 12934, 16372],
-                ['OTHER 2016', 623, current.other], // 2016 daily totals: ACN, GRN, UNI combined
+                ['OTHER 2016', 623, 1433, current.other], // 2016 daily totals: ACN, GRN, UNI combined
                 ['OTHER 2014', 329, 869, 1355, 1773, 2089, 2686, 2686, 2686, 3174, 3728, 4313, 4780, 4780, 4780, 5841, 8002, 9895]
             ],
             type: 'line',

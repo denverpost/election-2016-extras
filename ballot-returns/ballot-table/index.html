@@ -6,12 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+    <link rel="canonical" href="http://www.denverpost.com/2016/10/24/colorado-2016-ballot-tracker-a-look-at-mail-ballot-return-data/">
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.css" rel="stylesheet" type="text/css"> -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script> -->
     <script type="text/javascript" src="mustache.js"></script>
     <style>
-h1 {
+    h1 {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 36px;
         text-align: center;
@@ -23,7 +24,7 @@ h1 {
         border-collapse: collapse;
     }
     
-    tbody#ballot tr:nth-of-type(3n) td {
+    tbody#ballot tr:nth-of-type(4n) td {
         border-bottom: 2px solid rgba(192, 192, 192, 1);
     }
     
@@ -72,6 +73,13 @@ h1 {
     }
     
     @media only screen and (max-width: 500px) {
+        body {
+            font-size: 1em;
+            margin: 0;
+        }
+        td { padding: 2px 0 2px 2px; }
+        /* Hide the "OTHER" column on phones */
+        tr th:nth-child(6), tr td:nth-child(6) { display: none; }
         #table-container {
             overflow: scroll;
             overflow: auto;
@@ -84,8 +92,8 @@ h1 {
 <body>
     <div id="container">
         <div class="row">
-            <h1>Mail Ballots Received</h1>
-            <p>The table shows the number of mail ballots received and counted in the days leading up to Election Day, broken down by voter registration and comparing 2016 and 2014 totals. The date field is colored to reflect what party had the most ballots counted that day. Results will be updated daily.</p>
+            <h1>Colorado Mail Ballots Received</h1>
+            <p>The table shows the number of mail ballots received and counted in the days leading up to Election Day, broken down by voter registration and comparing 2016 and 2014 totals. The date field is colored to reflect what party had the most ballots counted. Results will be updated daily.</p>
         </div>
         <div class="row">
             <div class="twelve columns" id="table-container"></div>
@@ -100,6 +108,7 @@ h1 {
                         <th>UAF</th>
                         <th>LBR</th>
                         <th>OTHER</th>
+                        <th>TOTAL</th>
                     </tr>
                 </thead>
                 <tbody id="ballot">
@@ -111,6 +120,7 @@ h1 {
                         <td>{{UAF}}</td>
                         <td>{{LBR}}</td>
                         <td>{{minorparties}}</td>
+                        <td>{{Grand Total}}</td>
                     </tr>
                     {{/ballots}}
                 </tbody>
@@ -319,19 +329,67 @@ h1 {
                         //     "color": "diff"
                         // }, 
                         {
-                            "date": "Oct. 24, 2016",
-                            "ACN": "",
-                            "DEM": "",
-                            "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
-                            "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
-                            "color": "" // rep to color date field red, dem to color it blue
+                            "date": "Oct. 23 2016, 16 days to Election Day",
+                            "ACN": 265,
+                            "DEM": "48,030",
+                            "GRN": 345,
+                            "LBR": "1,054",
+                            "REP": "36,790",
+                            "UAF": "27,435",
+                            "UNI": "13",
+                            "Grand Total": "113,932",
+                            "minorparties": 610,
+                            "color": "dem" // rep to color date field red, dem to color it blue
                         }, {
-                            "date": "2014 (11 days to Election Day)",
+                            "date": "2014",
+                            "ACN": 185,
+                            "DEM": "24,468",
+                            "GRN": 144,
+                            "LBR": 537,
+                            "REP": "36,830",
+                            "UAF": "17,191",
+                            "UNI": 0,
+                            "Grand Total": "79,355",
+                            "minorparties": 329,
+                            "color": "rep"
+                        }, {
+                            "date": "+/-",
+                            "ACN": "+80",
+                            "DEM": "+23,562",
+                            "GRN": "",
+                            "LBR": "+517",
+                            "REP": "-40",
+                            "UAF": "+10,244",
+                            "UNI": "",
+                            "Grand Total": "+34,577",
+                            "minorparties": "+281",
+                            "color": "diff"
+                        }, {
+                            "date": "+/- %",
+                            "ACN": "+48%",
+                            "DEM": "+96%",
+                            "GRN": "",
+                            "LBR": "+96%",
+                            "REP": "0%",
+                            "UAF": "+60%",
+                            "UNI": "",
+                            "Grand Total": "+44%",
+                            "minorparties": "+85%",
+                            "color": "diff"
+                        }, {
+                            "date": "15 days",
+                            "ACN": "607",
+                            "DEM": "117,766",
+                            "GRN": "787",
+                            "LBR": "2,531",
+                            "REP": "94,499",
+                            "UAF": "70,410",
+                            "UNI": "39",
+                            "Grand Total": "286,639",
+                            "minorparties": "1,433",
+                            "color": "dem" // rep to color date field red, dem to color it blue
+                        }, {
+                            "date": "2014",
                             "ACN": 491,
                             "DEM": "64,777",
                             "GRN": 376,
@@ -344,30 +402,42 @@ h1 {
                             "color": "rep"
                         }, {
                             "date": "+/-",
-                            "ACN": "",
-                            "DEM": "",
-                            "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
-                            "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
+                            "ACN": "+116",
+                            "DEM": "+52,989",
+                            "GRN": "+411",
+                            "LBR": "+1,161",
+                            "REP": "+3,439",
+                            "UAF": "+24,006",
+                            "UNI": "+37",
+                            "Grand Total": "+82,159",
+                            "minorparties": "+940",
                             "color": "diff"
                         }, {
-                            "date": "Oct. 25, 2016",
-                            "ACN": "",
-                            "DEM": "",
-                            "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
-                            "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
-                            "color": ""
+                            "date": "+/- %",
+                            "ACN": "+24%",
+                            "DEM": "+82%",
+                            "GRN": "+109%",
+                            "LBR": "+85%",
+                            "REP": "+4%",
+                            "UAF": "+52%",
+                            "UNI": "+1,850%",
+                            "Grand Total": "+40.1%",
+                            "minorparties": "+190%",
+                            "color": "diff"
                         }, {
-                            "date": "2014 (10)",
+                            "date": "14 days",
+                            "ACN": "870",
+                            "DEM": "166,605",
+                            "GRN": "1,127",
+                            "LBR": "3,581",
+                            "REP": "141,354",
+                            "UAF": "103,354",
+                            "UNI": "60",
+                            "Grand Total": "416,951",
+                            "minorparties": "2,057",
+                            "color": "dem"
+                        }, {
+                            "date": "2014",
                             "ACN": 703,
                             "DEM": "105,401",
                             "GRN": 647,
@@ -380,30 +450,42 @@ h1 {
                             "color": "rep"
                         }, {
                             "date": "+/-",
-                            "ACN": "",
-                            "DEM": "",
-                            "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
-                            "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
+                            "ACN": "+167",
+                            "DEM": "+61,204",
+                            "GRN": "+480",
+                            "LBR": "+1,396",
+                            "REP": "-4,470",
+                            "UAF": "+26,069",
+                            "UNI": "+55",
+                            "Grand Total": "+84,901",
+                            "minorparties": "+1,349",
                             "color": "diff"
                         }, {
-                            "date": "Oct. 26, 2016",
-                            "ACN": "",
-                            "DEM": "",
-                            "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
-                            "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
-                            "color": ""
+                            "date": "+/- %",
+                            "ACN": "+24%",
+                            "DEM": "+58%",
+                            "GRN": "+74%",
+                            "LBR": "+64%",
+                            "REP": "-3%",
+                            "UAF": "+34%",
+                            "UNI": "+1100%",
+                            "Grand Total": "+26%",
+                            "minorparties": "+191%",
+                            "color": "diff"
                         }, {
-                            "date": "2014 (9)",
+                            "date": "13 days",
+                            "ACN": "1,238",
+                            "DEM": "224,914",
+                            "GRN": "1,509",
+                            "LBR": "4,866",
+                            "REP": "196,082",
+                            "UAF": "143,866",
+                            "UNI": "75",
+                            "Grand Total": "572,550",
+                            "minorparties": "2,822",
+                            "color": "dem"
+                        }, {
+                            "date": "2014",
                             "ACN": 903,
                             "DEM": "139,410",
                             "GRN": 865,
@@ -417,29 +499,41 @@ h1 {
                         }, {
                             "date": "+/-",
                             "ACN": "",
-                            "DEM": "",
+                            "DEM": "+85,504",
                             "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
+                            "LBR": "+2,037",
+                            "REP": "+5,847",
+                            "UAF": "+41,835",
                             "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
+                            "Grand Total": "+136,272",
+                            "minorparties": "+1,914",
                             "color": "diff"
                         }, {
-                            "date": "Oct. 27, 2016",
+                            "date": "+/- %",
                             "ACN": "",
-                            "DEM": "",
+                            "DEM": "+61%",
                             "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
+                            "LBR": "+72%",
+                            "REP": "+3%",
+                            "UAF": "+41%",
                             "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
-                            "color": ""
+                            "Grand Total": "+31%",
+                            "minorparties": "+210%",
+                            "color": "diff"
                         }, {
-                            "date": "2014 (8)",
+                            "date": "12 days",
+                            "ACN": "1,478",
+                            "DEM": "269,066",
+                            "GRN": "1,839",
+                            "LBR": "5,961",
+                            "REP": "241,750",
+                            "UAF": "177,225",
+                            "UNI": "95",
+                            "Grand Total": "697,414",
+                            "minorparties": "3,412",
+                            "color": "dem"
+                        }, {
+                            "date": "2014",
                             "ACN": "1,043",
                             "DEM": "164,443",
                             "GRN": "1,040",
@@ -453,29 +547,41 @@ h1 {
                         }, {
                             "date": "+/-",
                             "ACN": "",
-                            "DEM": "",
+                            "DEM": "+104,623",
                             "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
+                            "LBR": "+2,618",
+                            "REP": "+14,827",
+                            "UAF": "+55,413",
                             "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
+                            "Grand Total": "+178,804",
+                            "minorparties": "+2,363",
                             "color": "diff"
                         }, {
-                            "date": "Oct. 28, 2016",
+                            "date": "+/- %",
                             "ACN": "",
-                            "DEM": "",
+                            "DEM": "+64%",
                             "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
+                            "LBR": "+78%",
+                            "REP": "+7%",
+                            "UAF": "+45%",
                             "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
-                            "color": ""
+                            "Grand Total": "+34%",
+                            "minorparties": "+225%",
+                            "color": "diff"
                         }, {
-                            "date": "2014 (7)",
+                            "date": "11-9 days (weekend)",
+                            "ACN": "1,829",
+                            "DEM": "331,153",
+                            "GRN": "2,278",
+                            "LBR": "7,480",
+                            "REP": "300,275",
+                            "UAF": "223,540",
+                            "UNI": "113",
+                            "Grand Total": "866,668",
+                            "minorparties": "4220",
+                            "color": "dem"
+                        }, {
+                            "date": "2014",
                             "ACN": "1,316",
                             "DEM": "213,975",
                             "GRN": "1,362",
@@ -489,29 +595,41 @@ h1 {
                         }, {
                             "date": "+/-",
                             "ACN": "",
-                            "DEM": "",
+                            "DEM": "+117,178",
                             "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
+                            "LBR": "+3,238",
+                            "REP": "+17,958",
+                            "UAF": "+66,647",
                             "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
+                            "Grand Total": "+206,555",
+                            "minorparties": "+2,896",
                             "color": "diff"
                         }, {
-                            "date": "Oct. 31, 2016",
+                            "date": "+/- %",
                             "ACN": "",
-                            "DEM": "",
+                            "DEM": "+55%",
                             "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
+                            "LBR": "+76%",
+                            "REP": "+6%",
+                            "UAF": "+42%",
                             "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
-                            "color": ""
+                            "Grand Total": "+31%",
+                            "minorparties": "+219%",
+                            "color": "diff"
                         }, {
-                            "date": "2014 (6)",
+                            "date": "8 days",
+                            "ACN": "2,334",
+                            "DEM": "399,341",
+                            "GRN": "2,853",
+                            "LBR": "9,418",
+                            "REP": "371,746",
+                            "UAF": "281,845",
+                            "UNI": "148",
+                            "Grand Total": "1.067,685",
+                            "minorparties": "5,335",
+                            "color": "dem"
+                        }, {
+                            "date": "2014",
                             "ACN": "1,528",
                             "DEM": "251,174",
                             "GRN": "1,637",
@@ -525,29 +643,41 @@ h1 {
                         }, {
                             "date": "+/-",
                             "ACN": "",
-                            "DEM": "",
+                            "DEM": "+148,167",
                             "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
+                            "LBR": "+4,407",
+                            "REP": "+39,546",
+                            "UAF": "+94,360",
                             "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
+                            "Grand Total": "+288,641",
+                            "minorparties": "+3,798",
                             "color": "diff"
                         }, {
-                            "date": "Nov. 1, 2016",
+                            "date": "+/- %",
                             "ACN": "",
-                            "DEM": "",
+                            "DEM": "+59%",
                             "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
+                            "LBR": "+88%",
+                            "REP": "+12%",
+                            "UAF": "+50%",
                             "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
-                            "color": ""
+                            "Grand Total": "+37%",
+                            "minorparties": "+247%",
+                            "color": "diff"
                         }, {
-                            "date": "2014 (5)",
+                            "date": "7 days",
+                            "ACN": "2,660",
+                            "DEM": "443,517",
+                            "GRN": "3,182",
+                            "LBR": "10,606",
+                            "REP": "420,330",
+                            "UAF": "320,210",
+                            "UNI": "167",
+                            "Grand Total": "1,200,672",
+                            "minorparties": "6,009",
+                            "color": "dem"
+                        }, {
+                            "date": "2014",
                             "ACN": "1,763",
                             "DEM": "294,648",
                             "GRN": "1,952",
@@ -561,17 +691,29 @@ h1 {
                         }, {
                             "date": "+/-",
                             "ACN": "",
-                            "DEM": "",
+                            "DEM": "+148,869",
                             "GRN": "",
-                            "LBR": "",
-                            "REP": "",
-                            "UAF": "",
+                            "LBR": "+4,775",
+                            "REP": "+41,080",
+                            "UAF": "+98,167",
                             "UNI": "",
-                            "Grand Total": "",
-                            "minorparties": "",
+                            "Grand Total": "+295,172",
+                            "minorparties": "+4,233",
                             "color": "diff"
                         }, {
-                            "date": "Nov. 2, 2016",
+                            "date": "+/- %",
+                            "ACN": "",
+                            "DEM": "+51%",
+                            "GRN": "",
+                            "LBR": "+82%",
+                            "REP": "+11%",
+                            "UAF": "+44%",
+                            "UNI": "",
+                            "Grand Total": "+33%",
+                            "minorparties": "+238%",
+                            "color": "diff"
+                        }, {
+                            "date": "6 days",
                             "ACN": "",
                             "DEM": "",
                             "GRN": "",
@@ -583,7 +725,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014 (4)",
+                            "date": "2014",
                             "ACN": "2,038",
                             "DEM": "337,897",
                             "GRN": "2,258",
@@ -607,7 +749,19 @@ h1 {
                             "minorparties": "",
                             "color": "diff"
                         }, {
-                            "date": "Nov. 3, 2016",
+                            "date": "+/- %",
+                            "ACN": "",
+                            "DEM": "",
+                            "GRN": "",
+                            "LBR": "",
+                            "REP": "",
+                            "UAF": "",
+                            "UNI": "",
+                            "Grand Total": "",
+                            "minorparties": "",
+                            "color": "diff"
+                        }, {
+                            "date": "5 days",
                             "ACN": "",
                             "DEM": "",
                             "GRN": "",
@@ -619,7 +773,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014 (3)",
+                            "date": "2014",
                             "ACN": "2,239",
                             "DEM": "371,190",
                             "GRN": "2,523",
@@ -643,7 +797,19 @@ h1 {
                             "minorparties": "",
                             "color": "diff"
                         }, {
-                            "date": "Nov. 4, 2016",
+                            "date": "+/- %",
+                            "ACN": "",
+                            "DEM": "",
+                            "GRN": "",
+                            "LBR": "",
+                            "REP": "",
+                            "UAF": "",
+                            "UNI": "",
+                            "Grand Total": "",
+                            "minorparties": "",
+                            "color": "diff"
+                        }, {
+                            "date": "4-2 days (weekend)",
                             "ACN": "",
                             "DEM": "",
                             "GRN": "",
@@ -655,7 +821,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014 (2)",
+                            "date": "2014",
                             "ACN": "2,717",
                             "DEM": "446,448",
                             "GRN": "3,098",
@@ -679,7 +845,19 @@ h1 {
                             "minorparties": "",
                             "color": "diff"
                         }, {
-                            "date": "Nov. 7, 2016",
+                            "date": "+/- %",
+                            "ACN": "",
+                            "DEM": "",
+                            "GRN": "",
+                            "LBR": "",
+                            "REP": "",
+                            "UAF": "",
+                            "UNI": "",
+                            "Grand Total": "",
+                            "minorparties": "",
+                            "color": "diff"
+                        }, {
+                            "date": "1 day",
                             "ACN": "",
                             "DEM": "",
                             "GRN": "",
@@ -691,7 +869,7 @@ h1 {
                             "minorparties": "",
                             "color": ""
                         }, {
-                            "date": "2014 (1)",
+                            "date": "2014",
                             "County": "Grand Tota",
                             "ACN": "3,588",
                             "DEM": "564,488",
@@ -705,6 +883,18 @@ h1 {
                             "color": "rep"
                         }, {
                             "date": "+/-",
+                            "ACN": "",
+                            "DEM": "",
+                            "GRN": "",
+                            "LBR": "",
+                            "REP": "",
+                            "UAF": "",
+                            "UNI": "",
+                            "Grand Total": "",
+                            "minorparties": "",
+                            "color": "diff"
+                        }, {
+                            "date": "+/- %",
                             "ACN": "",
                             "DEM": "",
                             "GRN": "",
@@ -751,6 +941,18 @@ h1 {
                             "Grand Total": "",
                             "minorparties": "",
                             "color": "diff"
+                        }, {
+                            "date": "+/- %",
+                            "ACN": "",
+                            "DEM": "",
+                            "GRN": "",
+                            "LBR": "",
+                            "REP": "",
+                            "UAF": "",
+                            "UNI": "",
+                            "Grand Total": "",
+                            "minorparties": "",
+                            "color": "diff"
                         }
                     ],
                 },
@@ -766,7 +968,7 @@ h1 {
         })();
         </script>
         <div class="row footer">
-            <p><strong>Data source</strong>: <a href="https://www.sos.state.co.us/">Colorado Secretary of State</a></p>
+            <p><strong>Data source</strong>: <a target="_top" href="https://www.sos.state.co.us/">Colorado Secretary of State</a></p>
         </div>
     </div>
 </body>

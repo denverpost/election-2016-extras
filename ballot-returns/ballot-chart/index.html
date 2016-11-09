@@ -29,9 +29,12 @@
     <h3 style="margin-top: 35px;">2016 ballots received in Colorado&rsquo;s most-populous counties</h3>
     <p>The chart shows the number of ballots received from voters in the 12 most-populous counties. Counties are ordered by total number of ballots received. Last updated Nov. 7. <em>Click/unclick the legend to add and remove affiliations from chart.</em></p>
     <div id="county-chart"></div>
-    <h3 style="margin-top: 35px;">2016 Colorado ballots received</h3>
-    <p>As of the morning of Nov. 8, about 67.8 percent of ballots (2,215,258) have been received by county clerks. Colorado's final voter turnout for the 2012 presidential election <a href="https://www.sos.state.co.us/pubs/elections/Results/Abstract/pdf/2000-2099/2012AbstractBook.pdf" target="_blank">was 71 percent</a>. The percentage of ballots returned is based on 3,269,918 ballots having been mailed out as of Nov. 2.</p>
-    <div id="turnout-chart"></div>
+    <h3 style="margin-top: 35px;">2016 active registered voter turnout</h3>
+    <p>As of the morning of Nov. 8, about 68 percent of ballots mailed to active voters (2,215,258) have been received by county clerks. The percentage of ballots returned is based on 3,269,918 ballots having been mailed out as of Nov. 2.</p>
+    <div id="turnout-chart-active"></div>
+    <h3 style="margin-top: 35px;">2016 all registered voter turnout</h3>
+    <p>Among all registered voters, both active and inactive, the turnout as of Nov. 8 is 58 percent. Colorado's final voter turnout for the 2012 presidential election <a href="https://www.sos.state.co.us/pubs/elections/Results/Abstract/pdf/2000-2099/2012AbstractBook.pdf" target="_blank">was 71 percent.</a>.</p>
+    <div id="turnout-chart-all"></div>
     <script src="http://d3js.org/d3.v3.min.js " charset="utf-8"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script> -->
     <script src="c3.js"></script>
@@ -312,15 +315,40 @@
         },
     });
 
-    //GAUGE CHART
-    var gauge_chart = c3.generate({
+    //GAUGE CHARTS
+    var gauge_chart_active = c3.generate({
         size: {
             height: 400
         },
-        bindto: '#turnout-chart',
+        bindto: '#turnout-chart-active',
         data: {
             columns: [
                 ['Percentage of ballots returned', 67.8]
+            ],
+            type: 'gauge',
+        },
+        gauge: {},
+        color: {
+            pattern: ['#FF0000', '#60B044', '#60B044', '#60B044'], // the three color levels for the percentage values.
+            threshold: {
+                //            unit: 'value', // percentage is default
+                //            max: 200, // 100 is default
+                values: [30, 60, 90, 100]
+            }
+        },
+        size: {
+            height: 180
+        }
+    });
+
+    var gauge_chart_all = c3.generate({
+        size: {
+            height: 400
+        },
+        bindto: '#turnout-chart-all',
+        data: {
+            columns: [
+                ['Percentage of ballots returned', 58]
             ],
             type: 'gauge',
         },

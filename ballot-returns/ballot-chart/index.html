@@ -30,7 +30,7 @@
     <p>The chart shows the number of ballots received from voters in the 12 most-populous counties. Counties are ordered by total number of ballots received. Last updated Nov. 7. <em>Click/unclick the legend to add and remove affiliations from chart.</em></p>
     <div id="county-chart"></div>
     <h3 style="margin-top: 35px;">2016 active registered voter turnout</h3>
-    <p>As of the morning of Nov. 8, about 68 percent of ballots mailed to active voters (2,215,258) have been received by county clerks. The percentage of ballots returned is based on 3,269,918 ballots having been mailed out as of Nov. 2.</p>
+    <p>As of the morning of Nov. 9, 79.8 percent of Coloradans (2,610,897) had voted. The percentage of ballots returned is based on 3,269,918 ballots mailed out to active voters as of Nov. 2.</p>
     <div id="turnout-chart-active"></div>
     <h3 style="margin-top: 35px;">2016 all registered voter turnout</h3>
     <p>Among all registered voters, both active and inactive, the turnout as of Nov. 8 is 58 percent. Colorado's final voter turnout for the 2012 presidential election <a href="https://www.sos.state.co.us/pubs/elections/Results/Abstract/pdf/2000-2099/2012AbstractBook.pdf" target="_blank">was 71 percent.</a>.</p>
@@ -102,15 +102,15 @@
         bindto: '#ballot-chart',
         data: {
             columns: [
-                ['DEM 2016', 48030, 117766, 166605, 224914, 269066, 269066, 269066, 331153, 399341, 443517, 508938, 554340, 554340, 554340, 645020, current.dem], // 2016 daily totals
+                ['DEM 2016', 48030, 117766, 166605, 224914, 269066, 269066, 269066, 331153, 399341, 443517, 508938, 554340, 554340, 554340, 645020, 753052, current.dem], // 2016 daily totals
                 ['DEM 2014', 24468, 64777, 105401, 139410, 164443, 164443, 164443, 213975, 251174, 294648, 337897, 371190, 371190, 371190, 446448, 564488, 662042],
-                ['REP 2016', 36790, 94499, 141354, 196082, 241750, 241750, 241750, 300275, 371746, 420330, 494757, 547775, 547775, 547775, 652380, current.rep], // 2016 daily totals
+                ['REP 2016', 36790, 94499, 141354, 196082, 241750, 241750, 241750, 300275, 371746, 420330, 494757, 547775, 547775, 547775, 652380, 771745, current.rep], // 2016 daily totals
                 ['REP 2014', 36830, 91060, 145824, 190235, 226923, 226923, 226923, 282317, 332200, 379250, 433240, 475677, 475677, 475677, 558966, 693983, 774229],
-                ['UAF 2016', 27435, 70410, 103354, 143866, 177225, 177225, 177225, 223540, 281845, 320210, 383275, 429267, 429267, 429267, 527706, current.uaf], // 2016 daily totals
+                ['UAF 2016', 27435, 70410, 103354, 143866, 177225, 177225, 177225, 223540, 281845, 320210, 383275, 429267, 429267, 429267, 527706, 656882, current.uaf], // 2016 daily totals
                 ['UAF 2014', 17191, 46404, 77285, 102031, 121812, 121812, 121812, 156893, 187485, 222043, 259947, 290600, 290600, 290600, 359496, 491591, 605182],
-                ['LBR 2016', 1054, 2531, 3581, 4866, 5961, 5961, 5961, 7480, 9418, 10606, 12552, 14094, 14094, 14094, 17359, current.lbr], // 2016 daily totals
+                ['LBR 2016', 1054, 2531, 3581, 4866, 5961, 5961, 5961, 7480, 9418, 10606, 12552, 14094, 14094, 14094, 17359, 21698, current.lbr], // 2016 daily totals
                 ['LBR 2014', 537, 1370, 2185, 2829, 3343, 4242, 4242, 4242, 5011, 5831, 6763, 7498, 7498, 7498, 9211, 12934, 16372],
-                ['OTHER 2016', 623, 1433, 2057, 2822, 3412, 3412, 3412, 4220, 5335, 6009, 7051, 7849, 7849, 7849, 9564, current.other], // 2016 daily totals: ACN, GRN, UNI combined
+                ['OTHER 2016', 623, 1433, 2057, 2822, 3412, 3412, 3412, 4220, 5335, 6009, 7051, 7849, 7849, 7849, 9564, 11881, current.other], // 2016 daily totals: ACN, GRN, UNI combined
                 ['OTHER 2014', 329, 869, 1355, 1773, 2089, 2686, 2686, 2686, 3174, 3728, 4313, 4780, 4780, 4780, 5841, 8002, 9895]
             ],
             type: 'line',
@@ -348,7 +348,7 @@
         bindto: '#turnout-chart-all',
         data: {
             columns: [
-                ['Percentage of ballots returned', 58]
+                ['Percentage of ballots returned', 79.8]
             ],
             type: 'gauge',
         },

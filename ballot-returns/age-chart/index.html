@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Colorado ballot returns by age</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+    <link rel="canonical" href="">
+    <style>
+    .c3-ygrid-line.silver line {
+        stroke: rgba(192, 192, 192, 0.3);
+    }
+    
+    .c3-xgrid-line.silver line {
+        stroke: rgba(192, 192, 192, 0.3);
+    }
+    
+    .tick line {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="ballot-chart"></div>
+    <h3>2016 Colorado ballot returns by age and voter affiliation</h3>
+    <div id="ballot-age"></div>
+    <script src="http://d3js.org/d3.v3.min.js " charset="utf-8"></script>
+    <script src="../ballot-chart/c3.js"></script>
+    <script>
+    var colors = {
+        'DEM': 'rgba(5,113,176,1.0)',
+        'REP': 'rgba(202,0,32,1.0)',
+        'UAF': 'rgba(123,50,148,1.0)',
+        'LBR': 'rgba(253,174,97,1.0)',
+        'OTHER': 'rgba(171,221,164,1.0)',
+    };
+
+    // AGE CHART
+    var chart = c3.generate({
+        bindto: '#ballot-age',
+        data: {
+            columns: [
+                ['Democrat', 92087, 238281, 322317, 171572, 118472],
+                ['Republican', 73255, 179719, 378518, 178724, 151813],
+                ['Unaffiliated', 123880, 289383, 316560, 127506, 68450]
+            ],
+            colors: {
+                'Democrat': colors.DEM,
+                'Republican': colors.REP,
+                'Unaffiliated': colors.UAF,
+                'Libertarian': colors.LBR,
+                'Other Party': colors.OTHER
+            },
+            type: 'bar'
+        },
+        axis: {
+            x: {
+                type: 'category',
+                categories: ['18-25 years old', '26-40', '41-60', '61-70', '71 and older' ],
+                tick: {
+                    rotate: 75,
+                    multiline: false
+                }
+            },
+            y: {
+                tick: {
+                    format: d3.format(",")
+                },
+                label: {
+                    text: 'Ballots cast',
+                    position: 'outer-middle'
+                }
+            }
+        },
+        bar: {
+            width: {
+                ratio: 0.5 // this makes bar width 50% of length between ticks
+            }
+            // or
+            //width: 100 // this makes bar width 100px
+        }
+    });
+        var donut_chart = c3.generate({
+        bindto: '#ballot-donut',
+        data: {
+            columns: [
+                ['2016 Democrat', current.dem],
+                ['2016 Republican', current.rep],
+                ['2016 Unaffiliated', current.uaf],
+                ['2016 Libertarian', current.lbr],
+                ['2016 Other Party', current.other],
+            ],
+            colors: {
+                '2016 Democrat': colors.DEM,
+                '2016 Republican': colors.REP,
+                '2016 Unaffiliated': colors.UAF,
+                '2016 Libertarian': colors.LBR,
+                '2016 Other Party': colors.OTHER
+            },
+            type: 'donut',
+            onclick: function(d, i) {
+                console.log("onclick", d, i);
+            },
+            onmouseover: function(d, i) {
+                console.log("onmouseover", d, i);
+            },
+            onmouseout: function(d, i) {
+                console.log("onmouseout", d, i);
+            }
+        },
+        donut: {
+            title: "Mail ballots by party"
+        }
+    });
+
+    </script>
+</body>
+
+</html>
